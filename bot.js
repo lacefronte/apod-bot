@@ -17,7 +17,17 @@ async function handleInteraction(interaction) {
     if (interaction.commandName === 'test') {
         await apod.execute(interaction);
     }
+    // if (interaction.commandName === 'fetch') {
+    //     await apod.fetchNasaInfo();
+    // }
 }
+
+// async function displayNasaInfo(interaction) {
+//     if (!interaction.isCommand()) return;
+//     if (interaction.commandName === 'fetch') {
+//         await apod.fetchNasaInfo();
+//     }
+// }
 
 client.once(Events.ClientReady, readyDiscord);
 
