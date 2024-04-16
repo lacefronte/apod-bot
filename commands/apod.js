@@ -18,15 +18,15 @@ export async function execute(interaction) {
     await interaction.reply('picture should be here');
 }
 
-// export async function fetchNasaInfo() {
-//     const response = await fetch('https://api.nasa.gov/planetary/apod?api_key=' + process.env.APIKEY)
-//     const data = await response.json()
-//     return data
-// }
+export async function fetchNasaInfo() {
+    const response = await fetch('https://api.nasa.gov/planetary/apod?api_key=' + process.env.APIKEY)
+    const data = await response.json()
+    return data
+}
 
 // export const info = new SlashCommandBuilder()
 //     .setName('fetch')
-//     .setDescription(fetchNasaInfo())    
+//     .setDescription('fetch info')    
 
 // fetchNasaInfo.then(data => {
 //     console.log(data.title)
