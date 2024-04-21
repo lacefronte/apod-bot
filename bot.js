@@ -1,5 +1,6 @@
-import { Client, Events, GatewayIntentBits } from 'discord.js';
+import { Client, EmbedBuilder, Events, GatewayIntentBits } from 'discord.js';
 import { config } from 'dotenv';
+import request from 'undici';
 import * as apod from './commands/apod.js';
 
 config();
@@ -14,17 +15,15 @@ function readyDiscord(){
 
 async function handleInteraction(interaction) {
     if (!interaction.isCommand()) return;
-    if (interaction.commandName === 'test') {
+
+    await interaction.deferReply();
+
+    // calls execute function when user types "/apod"
+    if (interaction.commandName === 'apod') {
         await apod.execute(interaction);
     }
-}
 
-// async function displayNasaInfo(interaction) {
-//     if (!interaction.isCommand()) return;
-//     if (interaction.commandName === 'fetch') {
-//         await apod.fetchNasaInfo();
-//     }
-// }
+}
 
 client.once(Events.ClientReady, readyDiscord);
 

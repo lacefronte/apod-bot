@@ -1,34 +1,37 @@
 /* 
 AUTHOR: lacefronte
 PURPOSE: 
-Command should fetch the photo plus the explanation of the APOD at a certain time each day
-around 9AM NST
+Command should fetch the photo plus the explanation of the APOD at a certain time each day at 0900 EST
 */
 
-import { SlashCommandBuilder } from "discord.js";
+import { SlashCommandBuilder, EmbedBuilder } from "discord.js";
 import { config } from 'dotenv';
 
 config();
 
+// Creates the command name and description on Discord
 export const data = new SlashCommandBuilder()
-    .setName('test')
-    .setDescription('This is a demo.');
+    .setName('apod')
+    .setDescription('APOD Bot fetches information on today\'s Astronomy Picture of the Day');
 
+// Handles request from NASA website
 export async function execute(interaction) {
-    await interaction.reply('picture should be here');
+    const response = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${process.env.APIKEY}`)
+    const data = await response.json();
+    // await interaction.editReply(`Date: ${data.date}\nTitle: ${data.title}\nDescription: ${data.explanation}\n${data.hdurl}`);
+
+    const apodEmbed = new EmbedBuilder()
+        .setColor(`Blurple`)
+        .setTitle(`${data.title}`)
+        .setURL(`https://apod.nasa.gov/apod/astropix.html`)
+        .setAuthor({ name: `NASA`, iconURL:`https://i.imgur.com/S4oQ4OT.png`, url: `https://www.nasa.gov/`})
+        .setDescription(`${data.explanation}`)
+        .setThumbnail(`https://i.imgur.com/S4oQ4OT.png`)
+        .addFields( { name: `Date`, value: `${data.date}` })
+        .setImage(`${data.hdurl}`)
+        .setTimestamp()
+        .setFooter({ text: `${data.copyright}`, iconURL: `https://i.imgur.com/S4oQ4OT.png`});
+
+    await interaction.editReply({ embeds: [apodEmbed] });
+    
 }
-
-export async function fetchNasaInfo() {
-    const response = await fetch('https://api.nasa.gov/planetary/apod?api_key=' + process.env.APIKEY)
-    const data = await response.json()
-    return data
-}
-
-// export const info = new SlashCommandBuilder()
-//     .setName('fetch')
-//     .setDescription('fetch info')    
-
-// fetchNasaInfo.then(data => {
-//     console.log(data.title)
-//     console.log(data.description)
-// })
