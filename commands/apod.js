@@ -15,10 +15,10 @@ export const data = new SlashCommandBuilder()
     .setDescription('APOD Bot fetches information on today\'s Astronomy Picture of the Day');
 
 // Handles request from NASA website
+
 export async function execute(interaction) {
     const response = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${process.env.APIKEY}`)
     const data = await response.json();
-    // await interaction.editReply(`Date: ${data.date}\nTitle: ${data.title}\nDescription: ${data.explanation}\n${data.hdurl}`);
 
     const apodEmbed = new EmbedBuilder()
         .setColor(`Blurple`)
@@ -28,10 +28,11 @@ export async function execute(interaction) {
         .setDescription(`${data.explanation}`)
         .setThumbnail(`https://i.imgur.com/S4oQ4OT.png`)
         .addFields( { name: `Date`, value: `${data.date}` })
-        .setImage(`${data.hdurl}`)
+        .setImage(`${data.url}`)
         .setTimestamp()
         .setFooter({ text: `${data.copyright}`, iconURL: `https://i.imgur.com/S4oQ4OT.png`});
 
     await interaction.editReply({ embeds: [apodEmbed] });
+
     
 }

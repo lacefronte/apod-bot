@@ -1,9 +1,11 @@
+
+
 import { Client, EmbedBuilder, Events, GatewayIntentBits } from 'discord.js';
 import { config } from 'dotenv';
-import request from 'undici';
 import * as apod from './commands/apod.js';
 
 config();
+
 
 const client = new Client({
     intents: [GatewayIntentBits.Guilds],
@@ -14,16 +16,22 @@ function readyDiscord(){
 }
 
 async function handleInteraction(interaction) {
+
     if (!interaction.isCommand()) return;
 
-    await interaction.deferReply();
+    interaction.deferReply();
 
     // calls execute function when user types "/apod"
     if (interaction.commandName === 'apod') {
         await apod.execute(interaction);
+        
     }
 
 }
+
+
+
+
 
 client.once(Events.ClientReady, readyDiscord);
 
