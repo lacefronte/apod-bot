@@ -7,11 +7,12 @@ import * as apod from './commands/apod.js';
 
 config();
 
-
+// client object to get APOD bot
 const client = new Client({
     intents: [GatewayIntentBits.Guilds],
 });
 
+// indicates that bot is running in console
 function readyDiscord(){
     console.log( '🚀' + client.user.tag);
 }
@@ -35,12 +36,10 @@ async function handleInteraction(interaction) {
 
 }
 
-
-
-
-
 client.once(Events.ClientReady, readyDiscord);
 
+// APOD authentication 
 client.login(process.env.TOKEN);
 
+// APOD signed on and ready to action slash command
 client.on(Events.InteractionCreate, handleInteraction);
