@@ -22,10 +22,15 @@ async function handleInteraction(interaction) {
 
     interaction.deferReply();
 
-    // calls execute function when user types "/apod"
+    // calls execute function when user types "/apod" and creates CronJob object that posts at 0930EST daily
     if (interaction.commandName === 'apod') {
-        await apod.execute(interaction);
-        
+        const job = new CronJob(
+            '30 9 * * *',
+             function () {
+                apod.execute(interaction);
+
+             });
+        job.start();        
     }
 
 }

@@ -1,7 +1,7 @@
 /* 
 AUTHOR: lacefronte
 PURPOSE: 
-Command should fetch the photo plus the explanation of the APOD at a certain time each day at 0900 EST
+Command should fetch the photo plus the explanation of the APOD at a certain time each day at 0930 EST
 */
 
 import { SlashCommandBuilder, EmbedBuilder } from "discord.js";
