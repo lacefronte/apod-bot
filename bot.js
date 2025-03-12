@@ -2,6 +2,7 @@
 
 import { Client, EmbedBuilder, Events, GatewayIntentBits } from 'discord.js';
 import { config } from 'dotenv';
+import { CronJob } from 'cron';
 import * as apod from './commands/apod.js';
 
 config();
