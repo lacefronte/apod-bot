@@ -5,3 +5,6 @@
 
 #packages for discord
 /node_modules
+
+#commands folder no longer needed
+/commands

@@ -1,10 +1,7 @@
-
-
-import { Client, EmbedBuilder, Events, GatewayIntentBits } from 'discord.js';
+import { Client, Events, GatewayIntentBits } from 'discord.js';
 import { config } from 'dotenv';
-import { CronJob } from 'cron';
-import * as apod from './commands/apod.js';
 
+// loads process.env contents
 config();
 
 // client object to get APOD bot
@@ -17,29 +14,26 @@ function readyDiscord(){
     console.log( '🚀' + client.user.tag);
 }
 
-async function handleInteraction(interaction) {
-
-    if (!interaction.isCommand()) return;
-
-    interaction.deferReply();
-
-    // calls execute function when user types "/apod" and creates CronJob object that posts at 0930EST daily
-    if (interaction.commandName === 'apod') {
-        const job = new CronJob(
-            '30 9 * * *',
-             function () {
-                apod.execute(interaction);
-
-             });
-        job.start();        
-    }
-
-}
-
 client.once(Events.ClientReady, readyDiscord);
 
 // APOD authentication 
 client.login(process.env.TOKEN);
 
-// APOD signed on and ready to action slash command
-client.on(Events.InteractionCreate, handleInteraction);
+
+// Finds Discord channel ID to post the Astronomy Photo of the Day in a readable format
+client.on('ready', async () => {
+
+    var testChannel = client.channels.cache.find(channel => channel.id === process.env.CHANNELID);
+    const response = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${process.env.APIKEY}`)
+    const data = await response.json();
+    
+    // 86400000 milliseconds = 24 hours
+    try {
+        setInterval( () => {
+        testChannel.send(`## ${data.title} \n${data.url}  \n**Date: **${data.date} \n\n*${data.explanation}*\n-# **Credit:** ${data.copyright}`);
+    }, 86400000);}
+
+    catch(err) {
+        console.log('Oop, something went wrong D:');
+    }
+})
