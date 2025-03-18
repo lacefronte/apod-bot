@@ -30,10 +30,11 @@ client.on('ready', async () => {
     // 86400000 milliseconds = 24 hours
     try {
         setInterval( () => {
-        testChannel.send(`## ${data.title} \n${data.url}  \n**Date: **${data.date} \n\n*${data.explanation}*\n-# **Credit:** ${data.copyright}`);
+        testChannel.send(`## **${data.title}** \n**Credit:** ${data.copyright} \n${data.date} \n\n*${data.explanation}*\n${data.url}`);
     }, 86400000);}
 
     catch(err) {
+        console.error(err);
         console.log('Oop, something went wrong D:');
     }
 })

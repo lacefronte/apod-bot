@@ -1,3 +1,4 @@
+// IGNORE THIS FILE UNLESS YOU PLAN ON USING SLASH COMMANDS
 // Slash Commands Deployment Script
 // https://discordjs.guide/creating-your-bot/command-deployment.html#guild-commands/
 
