@@ -1,6 +1,7 @@
 # Discord APOD Bot
 
-![A screenshot of the APOD Bot posting an Astronomy Photo of the Day in Discord](/apod-bot/screenshots/apod_screenshot.png)
+![apod_screenshot](https://github.com/user-attachments/assets/f9f0917a-8928-4597-a419-ed5fbc372883)
+
 
 ## Overview
 
