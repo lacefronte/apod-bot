@@ -1,7 +1,6 @@
 # Discord APOD Bot
 
-![apod_screenshot](![image](https://github.com/user-attachments/assets/69acd4cc-2f35-41f2-a9d4-844d8a75fc1b)
-)
+![image](https://github.com/user-attachments/assets/4490086a-e62d-411b-93ea-22f9d32c1a10)
 
 
 ## Overview
